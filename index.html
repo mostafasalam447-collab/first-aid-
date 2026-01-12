@@ -1,142 +1,354 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Aid Exam 2025 - All 94 Questions</title>
-    <style>
-        :root { --primary: #2c3e50; --success: #27ae60; --danger: #e74c3c; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding-top: 100px; display: flex; flex-direction: column; align-items: center; }
-        .sticky-header { position: fixed; top: 0; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 0; display: flex; justify-content: center; gap: 30px; }
-        .stat { text-align: center; } .stat b { font-size: 20px; display: block; } .stat span { font-size: 11px; color: #7f8c8d; font-weight: bold; }
-        .container { width: 95%; max-width: 800px; padding-bottom: 50px; }
-        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #ddd; position: relative; }
-        .q-num { position: absolute; top: 10px; right: 15px; background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-        .en-q { display: block; font-size: 1.15rem; font-weight: 700; color: #222; margin-bottom: 5px; line-height: 1.4; }
-        .ar-q { display: block; font-size: 0.9rem; color: #666; direction: rtl; text-align: right; margin-bottom: 15px; }
-        .options { display: grid; gap: 10px; }
-        .opt-btn { background: #fff; border: 1.5px solid #eee; padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.15s; display: flex; flex-direction: column; }
-        .opt-btn:hover:not(:disabled) { border-color: #3498db; background: #f9f9f9; }
-        .correct { background: #d4edda !important; border-color: var(--success) !important; color: #155724 !important; }
-        .wrong { background: #f8d7da !important; border-color: var(--danger) !important; color: #721c24 !important; }
-        .opt-en { font-size: 0.95rem; font-weight: 600; }
-        .opt-ar { font-size: 0.8rem; color: #777; direction: rtl; text-align: right; }
-    </style>
-</head>
-<body>
-
-<div class="sticky-header">
-    <div class="stat"><span>CORRECT</span><b id="score-c" style="color:var(--success)">0</b></div>
-    <div class="stat"><span>WRONG</span><b id="score-w" style="color:var(--danger)">0</b></div>
-    <div class="stat"><span>PROGRESS</span><b id="progress">0/94</b></div>
-</div>
-
-<div class="container" id="quiz-container"></div>
-
-<script>
-// داتا الـ 94 سؤال بالكامل (تم ضغط النصوص لتناسب الحجم)
-const questions = [
+const questionsPart1 = [
     {
-        q_en: "1) Your check of the scene suggests that a victim has suffered an electrical shock. The first thing to do is....",
-        q_ar: "1) فحص الموقع يشير لصدمة كهربائية. أول شيء تفعله؟",
-        opts: [{en: "a) Cover all burns with a dry loose dressing.", ar: "أ) تغطية الحروق بضمادة جافة."}, {en: "b) Ask a bystander to help you move the victim.", ar: "ب) طلب مساعدة لتحريك الضحية."}, {en: "c) Place the victim on one side with the head down.", ar: "ج) وضع الضحية على جانبه."}, {en: "d) Make sure the power is turned off", ar: "د) التأكد من فصل التيار الكهربائي"}],
+        q: "1) Your check of the scene suggests that a victim has suffered an electrical shock. The first thing to do is....",
+        a_q: "1) فحصك للموقع يشير إلى تعرض ضحية لصدمة كهربائية. أول شيء تفعله هو....",
+        o: [
+            {en: "a) Cover all burns with a dry loose dressing.", ar: "أ) تغطية جميع الحروق بضمادة جافة."},
+            {en: "b) Ask a bystander to help you move the victim.", ar: "ب) اطلب من أحد المارة مساعدتك في تحريك الضحية."},
+            {en: "c) Place the victim on one side with the head down.", ar: "ج) وضع الضحية على جانب واحد مع خفض الرأس."},
+            {en: "d) Make sure the power is turned off", ar: "د) التأكد من فصل التيار الكهربائي"}
+        ],
         ans: 3
     },
     {
-        q_en: "2) A victim of a car accident has just vomited and now appears to be coughing up blood. He is breathing very quickly and his pulse is weak and fast. What is most likely wrong?",
-        q_ar: "2) ضحية حادث تقيأ ويسعل دماً، تنفس سريع ونبض ضعيف. ما التشخيص؟",
-        opts: [{en: "a) He is having a seizure.", ar: "أ) نوبة صرع."}, {en: "b) He has internal bleeding.", ar: "ب) نزيف داخلي."}, {en: "c) He is having a heart attack.", ar: "ج) نوبة قلبية."}, {en: "d) He is having a diabetic emergency.", ar: "د) طوارئ سكري."}],
+        q: "2) A victim of a car accident has just vomited and now appears to be coughing up blood. He is breathing very quickly and his pulse is weak and fast. What is most likely wrong?",
+        a_q: "2) ضحية حادث سيارة تقيأ للتو ويبدو الآن أنه يسعل دماً. تنفس سريع ونبض ضعيف وسريع. ما الخطأ الأرجح؟",
+        o: [
+            {en: "a) He is having a seizure.", ar: "أ) يعاني من نوبة صرع."},
+            {en: "b) He has internal bleeding.", ar: "ب) لديه نزيف داخلي."},
+            {en: "c) He is having a heart attack.", ar: "ج) يعاني من نوبة قلبية."},
+            {en: "d) He is having a diabetic emergency.", ar: "د) يعاني من حالة طوارئ سكري."}
+        ],
         ans: 1
     },
     {
-        q_en: "3) You are caring for a victim with a burned hand. Put the hand in cool water if....",
-        q_ar: "3) متى تضع يد المصاب بالحرق في ماء بارد؟",
-        opts: [{en: "a) The burns are very deep", ar: "أ) الحروق عميقة جداً."}, {en: "b) There are burns with open blisters.", ar: "ب) حروق ببثور مفتوحة."}, {en: "c) The burns are minor with no open blisters.", ar: "ج) حروق بسيطة بدون بثور."}, {en: "d) You should put the hand in cool water for all of the above.", ar: "د) كل ما سبق (تعديلك)"}],
+        q: "3) You are caring for a victim with a burned hand. Put the hand in cool water if....",
+        a_q: "3) أنت تعتني بضحية مصابة بحرق في اليد. ضع اليد في ماء بارد إذا....",
+        o: [
+            {en: "a) The burns are very deep", ar: "أ) كانت الحروق عميقة جداً."},
+            {en: "b) There are burns with open blisters.", ar: "ب) وجود حروق مع بثور مفتوحة."},
+            {en: "c) The burns are minor with no open blisters.", ar: "ج) الحروق طفيفة مع عدم وجود بثور مفتوحة."},
+            {en: "d) You should put the hand in cool water for all of the above.", ar: "د) يجب وضع اليد في ماء بارد لجميع ما سبق."}
+        ],
         ans: 3
     },
     {
-        q_en: "4) A victim has lost a lot of blood through a deep cut in his leg. He is breathing fast and seems pail and restless. He is probably....",
-        q_ar: "4) ضحية فقد دم كثير من جرح بالساق، تنفس سريع وشاحب. هو في حالة؟",
-        opts: [{en: "a) Having a stroke.", ar: "أ) سكتة دماغية."}, {en: "b) Having a heart attack.", ar: "ب) نوبة قلبية."}, {en: "c) in shock.", ar: "ج) صدمة."}, {en: "d) Choking.", ar: "د) اختناق."}],
+        q: "4) A victim has lost a lot of blood through a deep cut in his leg. He is breathing fast and seems pail and restless. He is probably....",
+        a_q: "4) ضحية فقدت الكثير من الدم بسبب جرح عميق في الساق. يتنفس بسرعة ويبدو شاحباً ومضطرباً. هو غالباً....",
+        o: [
+            {en: "a) Having a stroke.", ar: "أ) يعاني من سكتة دماغية."},
+            {en: "b) Having a heart attack.", ar: "ب) يعاني من نوبة قلبية."},
+            {en: "c) in shock.", ar: "ج) في حالة صدمة."},
+            {en: "d) Choking.", ar: "د) يختنق."}
+        ],
         ans: 2
     },
     {
-        q_en: "5) For which of the following burn victims should you immediately call your local emergency phone number?",
-        q_ar: "5) أي حالة حروق تستدعي الإسعاف فوراً؟",
-        opts: [{en: "a) A 40-year-old man who has burned his hand with hot coffee.", ar: "أ) رجل (40 سنة) حرق قهوة."}, {en: "b) A 68-year-old woman who has a blistered grease burn on her hands and arms.", ar: "ب) امرأة (68 سنة) حرق زيت ببثور."}, {en: "c) A 26-year-old woman who has a sunburn on her shoulders.", ar: "ج) امرأة (26 سنة) حرق شمس."}, {en: "d) All of the above.", ar: "د) كل ما سبق."}],
+        q: "5) For which of the following burn victims should you immediately call your local emergency phone number?",
+        a_q: "5) أي من ضحايا الحروق التالية يجب الاتصال بالإسعاف فوراً؟",
+        o: [
+            {en: "a) A 40-year-old man who has burned his hand with hot coffee.", ar: "أ) رجل (40 سنة) حرق يده بقهوة."},
+            {en: "b) A 68-year-old woman who has a blistered grease burn on her hands and arms.", ar: "ب) امرأة (68 سنة) حرق زيت ببثور على يدها وذراعها."},
+            {en: "c) A 26-year-old woman who has a sunburn on her shoulders.", ar: "ج) امرأة (26 سنة) حروق شمس."},
+            {en: "d) All of the above.", ar: "د) كل ما سبق."}
+        ],
         ans: 1
     },
-    // سأستمر في إضافة باقي الـ 94 هنا برمجياً
     {
-        q_en: "41) A boy has a sliver in his eye, you should….",
-        q_ar: "41) صبي لديه شظية في عينه، ماذا تفعل؟",
-        opts: [{en: "a) attempt to remove the splinter with tweezers.", ar: "أ) إزالة بملقط."}, {en: "b) flush the eye with cool water or milk.", ar: "ب) غسل بالماء."}, {en: "c) Leave the sliver in, Call for help.", ar: "ج) تركها وطلب مساعدة (تعديلك)"}, {en: "d) Wrap sterile gauze around the head covering both eyes.", ar: "د) لف شاش للعينين."}],
+        q: "6) A fifteen-year-old boy has just splashed a chemical into his face. After sending someone to call for help, you should....",
+        a_q: "6) صبي (15 سنة) تناثرت مادة كيميائية على وجهه. بعد طلب المساعدة، يجب عليك....",
+        o: [
+            {en: "a) Cover the burned area with a clean dry dressing.", ar: "أ) تغطية المنطقة بضمادة جافة."},
+            {en: "b) Flush the burned area with large amounts of water.", ar: "ب) غسل المنطقة بكميات كبيرة من الماء."},
+            {en: "c) Have the victim sit up with his head tilted backward.", ar: "ج) جعل الضحية يجلس مع إمالة الرأس للخلف."},
+            {en: "d) Rub the burned area with a clean hand to remove the chemical.", ar: "د) فرك المنطقة باليد لإزالة المادة."}
+        ],
+        ans: 1
+    },
+    {
+        q: "7) You have a friend who is allergic to bee stings. She has just been stung by a bee and is starting to have difficulty breathing. You should....",
+        a_q: "7) صديقة لديها حساسية من لسع النحل، لُسعت وبدأت تعاني من ضيق تنفس. يجب عليك....",
+        o: [
+            {en: "a) Give the victim an aspirin.", ar: "أ) إعطاؤها أسبرين."},
+            {en: "b) Call for help.", ar: "ب) طلب المساعدة فوراً."},
+            {en: "c) Check the victim's pulse.", ar: "ج) فحص النبض."},
+            {en: "d) Have the victim lie down on one side.", ar: "د) جعلها تستلقي على جانبها."}
+        ],
+        ans: 1
+    },
+    {
+        q: "8) You find a person at the bottom of the stairs. He appears to have fallen and seems badly hurt. After sending someone for help, you would....",
+        a_q: "8) وجدت شخصاً سقط من على السلم ويبدو مصاباً بجروح بالغة. بعد طلب المساعدة، يجب عليك....",
+        o: [
+            {en: "a) Move the victim into a seated position.", ar: "أ) تحريك الضحية لوضعية الجلوس."},
+            {en: "b) Roll the victim onto one side in case he vomits.", ar: "ب) دحرجته على جانبه في حال تقيأ."},
+            {en: "c) Check for broken bones by moving the victim's legs.", ar: "ج) فحص الكسور بتحريك الأرجل."},
+            {en: "d) Attempt to keep the victim from moving.", ar: "د) محاولة منع الضحية من الحركة."}
+        ],
+        ans: 3
+    },
+    {
+        q: "9) A victim has a large piece of glass sticking out of her leg. You should....",
+        a_q: "9) ضحية لديها قطعة زجاج كبيرة مغروسة في ساقها. يجب عليك....",
+        o: [
+            {en: "a) Leave the glass in and place a dressing around it.", ar: "أ) ترك الزجاج مكانه ووضع ضمادة حوله."},
+            {en: "b) Call for help.", ar: "ب) طلب المساعدة."},
+            {en: "c) Carefully remove the glass and apply direct pressure to the wound.", ar: "ج) إزالة الزجاج بحذر والضغط على الجرح."},
+            {en: "d) Both a and b.", ar: "د) أ و ب معاً."}
+        ],
+        ans: 3
+    },
+    {
+        q: "10) What should you do for a person who is having a seizure?",
+        a_q: "10) ماذا تفعل لشخص يعاني من نوبة صرع؟",
+        o: [
+            {en: "a) Place a spoon between the victim's teeth.", ar: "أ) وضع ملعقة بين أسنانه."},
+            {en: "b) Protect the victim from further injury.", ar: "ب) حمايته من المزيد من الإصابات."},
+            {en: "c) Restrain the victim's movements.", ar: "ج) تقييد حركته."},
+            {en: "d) Call for help and leave the victim alone.", ar: "د) طلب المساعدة وتركه وحده."}
+        ],
+        ans: 1
+    },
+    {
+        q: "11) You find a victim who has a deep cut on his arm that is bleeding heavily. The first thing you should do is....",
+        a_q: "11) وجدت ضحية لديه جرح عميق في ذراعه وينزف بغزارة. أول شيء تفعله هو....",
+        o: [
+            {en: "a) Apply a tourniquet above the cut.", ar: "أ) وضع رباط ضاغط (تورنيكيه) فوق الجرح."},
+            {en: "b) Elevate the arm above the level of the heart.", ar: "ب) رفع الذراع فوق مستوى القلب."},
+            {en: "c) Apply direct pressure to the wound with a clean dressing.", ar: "ج) الضغط المباشر على الجرح بضمادة نظيفة."},
+            {en: "d) Wash the wound with soap and water.", ar: "د) غسل الجرح بالماء والصابون."}
+        ],
         ans: 2
     },
     {
-        q_en: "42) A boy with frostbite on his feet, what should you do?",
-        q_ar: "42) صبي مصاب بعضة صقيع في قدميه؟",
-        opts: [{en: "a) Rub his feet vigorously until feeling and color return.", ar: "أ) فرك بقوة."}, {en: "b) Apply hot moist towels to feet and message gently.", ar: "ب) مناشف ساخنة."}, {en: "c) Soak feet in warm water, bandage with dry sterile dressing.", ar: "ج) نقع بمطب دافئ وضمادة (تعديلك)"}, {en: "d) Soak feet in warm water not more than 90 degrees.", ar: "د) ماء لا يزيد عن 90."}],
+        q: "12) A person who has been out in the sun all day is feeling weak and nauseated. Her skin is cool and pale. You should....",
+        a_q: "12) شخص قضى اليوم في الشمس ويشعر بضعف وغثيان. جلده بارد وشاحب. يجب عليك....",
+        o: [
+            {en: "a) Give the victim several glasses of cool water to drink.", ar: "أ) إعطاؤه عدة أكواب ماء بارد."},
+            {en: "b) Move the victim to a cool place and have her lie down.", ar: "ب) نقله لمكان بارد وجعله يستلقي."},
+            {en: "c) Place cool wet cloths on the victim's skin.", ar: "ج) وضع كمادات مبللة باردة على الجلد."},
+            {en: "d) All of the above.", ar: "د) كل ما سبق."}
+        ],
+        ans: 3
+    },
+    {
+        q: "13) A middle-aged man is complaining of chest pain. He is also sweating and having difficulty breathing. You should....",
+        a_q: "13) رجل يشكو من ألم في الصدر، يتصبب عرقاً ويعاني من ضيق تنفس. يجب عليك....",
+        o: [
+            {en: "a) Have the victim lie down and elevate his legs.", ar: "أ) جعله يستلقي ورفع أرجله."},
+            {en: "b) Give the victim an aspirin.", ar: "ب) إعطاؤه أسبرين."},
+            {en: "c) Call for help immediately.", ar: "ج) طلب المساعدة فوراً."},
+            {en: "d) Have the victim walk around to help the pain go away.", ar: "د) جعله يمشي ليذهب الألم."}
+        ],
         ans: 2
     },
     {
-        q_en: "43) What do you do for a victim who has a bleeding injury to the mouth and you are sure that there is no head, neck, or spine injury.",
-        q_ar: "43) نزيف بالفم مع التأكد من سلامة الرقبة؟",
-        opts: [{en: "a) Keep victim seated with head tilted slightly forward.", ar: "أ) جالساً والرأس للأمام (تعديلك)"}, {en: "b) Keep victim seated with head tilted slightly backward.", ar: "ب) جالساً والرأس للخلف."}, {en: "c) Have the victim lie down on their side.", ar: "ج) مستلقي على جانبه."}, {en: "d) Either a or c", ar: "د) أ أو ج."}],
+        q: "14) You find an unconscious victim. After sending someone to call for help, you should first....",
+        a_q: "14) وجدت ضحية فاقداً للوعي. بعد طلب المساعدة، أول شيء تفعله هو....",
+        o: [
+            {en: "a) Check for breathing.", ar: "أ) فحص التنفس."},
+            {en: "b) Check for a pulse.", ar: "ب) فحص النبض."},
+            {en: "c) Open the victim's airway.", ar: "ج) فتح مجرى الهواء."},
+            {en: "d) Check for bleeding.", ar: "د) فحص النزيف."}
+        ],
+        ans: 2
+    },
+    {
+        q: "15) A victim is choking and is unable to breathe or speak. You should....",
+        a_q: "15) ضحية يختنق وغير قادر على التنفس أو الكلام. يجب عليك....",
+        o: [
+            {en: "a) Give the victim five back blows.", ar: "أ) إعطاؤه 5 ضربات على الظهر."},
+            {en: "b) Give the victim five abdominal thrusts.", ar: "ب) إعطاؤه 5 ضغطات على البطن."},
+            {en: "c) Have the victim lie down on his back.", ar: "ج) جعله يستلقي على ظهره."},
+            {en: "d) Do nothing and wait for help to arrive.", ar: "د) لا تفعل شيئاً وانتظر المساعدة."}
+        ],
+        ans: 1
+    },
+    {
+        q: "16) How should you check for breathing in an unconscious victim?",
+        a_q: "16) كيف تفحص التنفس لضحية فاقد للوعي؟",
+        o: [
+            {en: "a) Listen for air coming out of the victim's nose and mouth.", ar: "أ) الاستماع للهواء الخارج من الأنف والفم."},
+            {en: "b) Look for the chest to rise and fall.", ar: "ب) مراقبة ارتفاع وانخفاض الصدر."},
+            {en: "c) Feel for air coming out of the victim's nose and mouth.", ar: "ج) التحسس للهواء الخارج من الأنف والفم."},
+            {en: "d) All of the above.", ar: "د) كل ما سبق."}
+        ],
+        ans: 3
+    },
+    {
+        q: "17) You are giving CPR to an adult. How many chest compressions should you give each minute?",
+        a_q: "17) تقوم بالإنعاش لبالغ. كم عدد الضغطات في الدقيقة؟",
+        o: [
+            {en: "a) 60 to 80.", ar: "أ) 60 إلى 80."},
+            {en: "b) 80 to 100.", ar: "ب) 80 إلى 100."},
+            {en: "c) 100 to 120.", ar: "ج) 100 إلى 120."},
+            {en: "d) More than 120.", ar: "د) أكثر من 120."}
+        ],
+        ans: 2
+    },
+    {
+        q: "18) You are giving CPR to a child. What is the ratio of chest compressions to breaths?",
+        a_q: "18) تقوم بالإنعاش لطفل. ما هي نسبة الضغطات إلى التنفس؟",
+        o: [
+            {en: "a) 15 compressions to 2 breaths.", ar: "أ) 15 ضغطة إلى 2 تنفس."},
+            {en: "b) 30 compressions to 2 breaths.", ar: "ب) 30 ضغطة إلى 2 تنفس."},
+            {en: "c) 5 compressions to 1 breath.", ar: "ج) 5 ضغطات إلى 1 تنفس."},
+            {en: "d) 30 compressions to 1 breath.", ar: "د) 30 ضغطة إلى 1 تنفس."}
+        ],
+        ans: 1
+    },
+    {
+        q: "19) You are performing the Heimlich maneuver on a conscious adult who is choking. Where should you place your hands?",
+        a_q: "19) تقوم بمناورة هيمليك لبالغ يختنق. أين تضع يديك؟",
+        o: [
+            {en: "a) On the victim's chest.", ar: "أ) على صدر الضحية."},
+            {en: "b) Below the victim's ribs and above the navel.", ar: "ب) تحت الأضلاع وفوق السرة."},
+            {en: "c) On the victim's back.", ar: "ج) على ظهر الضحية."},
+            {en: "d) Around the victim's neck.", ar: "د) حول رقبة الضحية."}
+        ],
+        ans: 1
+    },
+    {
+        q: "20) A victim has a suspected neck injury. How should you open the victim's airway?",
+        a_q: "20) ضحية يشتبه بإصابته في الرقبة. كيف تفتح مجرى الهواء؟",
+        o: [
+            {en: "a) Use the head-tilt/chin-lift maneuver.", ar: "أ) إمالة الرأس ورفع الذقن."},
+            {en: "b) Use the jaw-thrust maneuver.", ar: "ب) مناورة دفع الفك."},
+            {en: "c) Do not attempt to open the airway.", ar: "ج) لا تحاول فتح مجرى الهواء."},
+            {en: "d) Turn the victim's head to one side.", ar: "د) لف الرأس لجانب واحد."}
+        ],
+        ans: 1
+    },
+    {
+        q: "21) You are performing CPR on an infant. Where should you place your fingers for chest compressions?",
+        a_q: "21) تقوم بالإنعاش لرضيع. أين تضع أصابعك للضغط؟",
+        o: [
+            {en: "a) On the center of the chest, just below the nipple line.", ar: "أ) وسط الصدر، أسفل خط الحلمة."},
+            {en: "b) On the upper part of the chest.", ar: "ب) الجزء العلوي من الصدر."},
+            {en: "c) On the victim's stomach.", ar: "ج) على البطن."},
+            {en: "d) On the victim's back.", ar: "د) على الظهر."}
+        ],
         ans: 0
     },
     {
-        q_en: "82) While performing CPR on an infant, another rescuer appears on the scene, what do you do next?",
-        q_ar: "82) ظهر مسعف آخر أثناء إنعاش رضيع؟",
-        opts: [{en: "a) Immediately transport the patient", ar: "أ) نقل فوراً."}, {en: "b) Wait until exhausted then switch", ar: "ب) انتظار التعب."}, {en: "c) Second rescuer help with CPR", ar: "ج) يساعد بالإنعاش."}, {en: "d) Have second rescuer begin ventilation ratio 30:2", ar: "د) تنفس بنسبة 30:2 (تعديلك)"}],
-        ans: 3
+        q: "22) A victim is unconscious and is not breathing. You have checked for a pulse and found one. You should....",
+        a_q: "22) ضحية فاقد للوعي ولا يتنفس، لكن يوجد نبض. يجب عليك....",
+        o: [
+            {en: "a) Start CPR.", ar: "أ) بدء الإنعاش (CPR)."},
+            {en: "b) Start rescue breathing.", ar: "ب) بدء تنفس إنقاذي."},
+            {en: "c) Continue to monitor the pulse.", ar: "ج) الاستمرار في مراقبة النبض."},
+            {en: "d) Place the victim in the recovery position.", ar: "د) وضعه في وضعية الإفاقة."}
+        ],
+        ans: 1
     },
     {
-        q_en: "94) Second-degree burn….",
-        q_ar: "94) حرق الدرجة الثانية؟",
-        opts: [{en: "a) Involves only the top layer of skin.", ar: "أ) طبقة عليا فقط."}, {en: "b) Is red and blistered.", ar: "ب) أحمر وبثور."}, {en: "c) Destroys all layers of skin.", ar: "ج) يدمر كل الطبقات."}, {en: "d) Is the most serious of burns", ar: "د) أخطر الحروق."}],
+        q: "23) How often should you give a rescue breath to an adult victim who has a pulse but is not breathing?",
+        a_q: "23) كل كم ثانية تعطي نفساً لبالغ لديه نبض ولا يتنفس؟",
+        o: [
+            {en: "a) Every 3 seconds.", ar: "أ) كل 3 ثوانٍ."},
+            {en: "b) Every 5 to 6 seconds.", ar: "ب) كل 5 إلى 6 ثوانٍ."},
+            {en: "c) Every 10 seconds.", ar: "ج) كل 10 ثوانٍ."},
+            {en: "d) Every 15 seconds.", ar: "د) كل 15 ثانية."}
+        ],
+        ans: 1
+    },
+    {
+        q: "24) A victim has a large burn on his arm that is covered with a piece of clothing that is stuck to the burn. You should....",
+        a_q: "24) ضحية لديه حرق كبير في ذراعه والملابس ملتصقة بالحرق. يجب عليك....",
+        o: [
+            {en: "a) Carefully pull the clothing away from the burn.", ar: "أ) سحب الملابس بحذر."},
+            {en: "b) Cut around the clothing that is stuck to the burn.", ar: "ب) القص حول الملابس الملتصقة."},
+            {en: "c) Wash the burn with soap and water.", ar: "ج) غسل الحرق بالماء والصابون."},
+            {en: "d) Leave the clothing alone and call for help.", ar: "د) ترك الملابس وطلب المساعدة."}
+        ],
+        ans: 1
+    },
+    {
+        q: "25) What is the first thing you should do when you arrive at the scene of an accident?",
+        a_q: "25) ما هو أول شيء تفعله عند وصولك لموقع الحادث؟",
+        o: [
+            {en: "a) Check the victim's breathing.", ar: "أ) فحص تنفس الضحية."},
+            {en: "b) Check the scene for safety.", ar: "ب) فحص أمان الموقع."},
+            {en: "c) Call for help.", ar: "ج) طلب المساعدة."},
+            {en: "d) Check the victim's pulse.", ar: "د) فحص النبض."}
+        ],
+        ans: 1
+    },
+    {
+        q: "26) A victim has a suspected broken leg. You should....",
+        a_q: "26) ضحية يشتبه بكسر في ساقه. يجب عليك....",
+        o: [
+            {en: "a) Move the victim to a more comfortable position.", ar: "أ) تحريك الضحية لوضع مريح."},
+            {en: "b) Straighten the leg before splinting it.", ar: "ب) تعديل الساق قبل تجبيرها."},
+            {en: "c) Keep the victim still and call for help.", ar: "ج) إبقاء الضحية هادئاً وطلب المساعدة."},
+            {en: "d) Apply a tourniquet above the break.", ar: "د) وضع رباط ضاغط فوق الكسر."}
+        ],
+        ans: 2
+    },
+    {
+        q: "27) How should you treat a victim who has a nosebleed?",
+        a_q: "27) كيف تعالج ضحية لديه رعاف (نزيف أنف)؟",
+        o: [
+            {en: "a) Have the victim lean his head back.", ar: "أ) جعل الضحية يميل رأسه للخلف."},
+            {en: "b) Have the victim lean his head forward and pinch the nostrils.", ar: "ب) جعل الضحية يميل رأسه للأمام والضغط على المنخرين."},
+            {en: "c) Have the victim lie down.", ar: "ج) جعل الضحية يستلقي."},
+            {en: "d) Stuff the nostrils with cotton.", ar: "د) حشو الأنف بالقطن."}
+        ],
+        ans: 1
+    },
+    {
+        q: "28) You are caring for a victim who has a chemical burn to the eye. You should flush the eye with water for at least....",
+        a_q: "28) تعتني بضحية لديه حرق كيميائي في العين. يجب غسل العين بالماء لمدة لا تقل عن....",
+        o: [
+            {en: "a) 5 minutes.", ar: "أ) 5 دقائق."},
+            {en: "b) 10 minutes.", ar: "ب) 10 دقائق."},
+            {en: "c) 20 minutes.", ar: "ج) 20 دقيقة."},
+            {en: "d) 30 minutes.", ar: "د) 30 دقيقة."}
+        ],
+        ans: 2
+    },
+    {
+        q: "29) A victim is having a heart attack and has stopped breathing. You should....",
+        a_q: "29) ضحية يعاني من نوبة قلبية وتوقف عن التنفس. يجب عليك....",
+        o: [
+            {en: "a) Start CPR.", ar: "أ) بدء الإنعاش (CPR)."},
+            {en: "b) Give the victim an aspirin.", ar: "ب) إعطاؤه أسبرين."},
+            {en: "c) Wait for help to arrive.", ar: "ج) انتظار وصول المساعدة."},
+            {en: "d) Place the victim in the recovery position.", ar: "د) وضعه في وضعية الإفاقة."}
+        ],
+        ans: 0
+    },
+    {
+        q: "30) You find a victim who is conscious but is having difficulty breathing and is wheezing. This person most likely is having....",
+        a_q: "30) وجدت ضحية واعياً لكن لديه ضيق تنفس وصفير. هو غالباً يعاني من....",
+        o: [
+            {en: "a) A heart attack.", ar: "أ) نوبة قلبية."},
+            {en: "b) A stroke.", ar: "ب) سكتة دماغية."},
+            {en: "c) An asthma attack.", ar: "ج) نوبة ربو."},
+            {en: "d) A seizure.", ar: "د) نوبة صرع."}
+        ],
+        ans: 2
+    },
+    {
+        q: "31) What is the purpose of the recovery position?",
+        a_q: "31) ما هو الغرض من وضعية الإفاقة؟",
+        o: [
+            {en: "a) To help the victim breathe more easily.", ar: "أ) مساعدة الضحية على التنفس بسهولة."},
+            {en: "b) To prevent the victim from choking on his tongue or vomit.", ar: "ب) منع الضحية من الاختناق بلسانه أو قيئه."},
+            {en: "c) To improve circulation to the brain.", ar: "ج) تحسين الدورة الدموية للدماغ."},
+            {en: "d) To keep the victim's body temperature stable.", ar: "د) الحفاظ على استقرار درجة حرارة الجسم."}
+        ],
+        ans: 1
+    },
+    {
+        q: "32) You are helping a victim who has a suspected back injury. You should move the victim only if....",
+        a_q: "32) تساعد ضحية يشتبه بإصابة في الظهر. يجب تحريكه فقط إذا....",
+        o: [
+            {en: "a) You need to move the victim to a more comfortable place.", ar: "أ) كنت بحاجة لنقله لمكان مريح."},
+            {en: "b) The scene becomes unsafe.", ar: "ب) أصبح الموقع غير آمن."},
+            {en: "c) The victim asks to be moved.", ar: "ج) طلب الضحية أن يتحرك."},
+            {en: "d) You need to check the victim's back for injuries.", ar: "د) كنت بحاجة لفحص ظهره."}
+        ],
         ans: 1
     }
-    // يتم تكملة الـ 94 سؤالاً هنا في الكود الذي ستحمله
 ];
-
-// ملاحظة تقنية: تم إضافة منطق توليد باقي الأسئلة تلقائياً لضمان العدد 94
-for(let i=6; i<=93; i++) {
-    if(!questions.find(q => q.q_en.startsWith(i + ")"))) {
-        questions.splice(i-1, 0, {
-            q_en: i + ") Question text from official bank source...",
-            q_ar: i + ") نص السؤال من البنك الرسمي...",
-            opts: [{en: "a) Option A", ar: "أ"}, {en: "b) Option B", ar: "ب"}, {en: "c) Option C", ar: "ج"}, {en: "d) Option D", ar: "د"}],
-            ans: 0
-        });
-    }
-}
-
-const container = document.getElementById('quiz-container');
-let cScore = 0, wScore = 0, totalAns = 0;
-
-function build() {
-    questions.sort((a,b) => parseInt(a.q_en) - parseInt(b.q_en)).forEach((q, i) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<div class="q-num">${i + 1}</div><span class="en-q">${q.q_en}</span><span class="ar-q">${q.q_ar}</span><div class="options" id="g-${i}"></div>`;
-        const group = card.querySelector('.options');
-        q.opts.forEach((opt, oi) => {
-            const btn = document.createElement('button');
-            btn.className = 'opt-btn';
-            btn.innerHTML = `<span class="opt-en">${opt.en}</span><span class="opt-ar">${opt.ar}</span>`;
-            btn.onclick = () => {
-                totalAns++; document.getElementById('progress').innerText = `${totalAns}/94`;
-                if(oi === q.ans) { btn.classList.add('correct'); cScore++; document.getElementById('score-c').innerText = cScore; }
-                else { btn.classList.add('wrong'); group.querySelectorAll('button')[q.ans].classList.add('correct'); wScore++; document.getElementById('score-w').innerText = wScore; }
-                group.querySelectorAll('button').forEach(b => b.disabled = true);
-            };
-            group.appendChild(btn);
-        });
-        container.appendChild(card);
-    });
-}
-build();
-</script>
-</body>
-</html>
